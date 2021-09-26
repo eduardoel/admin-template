@@ -4,7 +4,10 @@ import MenuItem from "./MenuItem";
 
 export default function SideMenu() {
     return (
-        <aside className="flex flex-col">
+        <aside className="flex flex-col
+            bg-gray-200 text-gray-700
+            dark:bg-gray-900
+        ">
             <div className={`
                 flex flex-col items-center justify-center
                 bg-gradient-to-r from-indigo-500 to-purple-800
@@ -21,8 +24,9 @@ export default function SideMenu() {
                 <MenuItem textMenu="Logout" iconMenu={IconLogout} 
                     onClick={() => console.log('logout')} 
                     className={`
-                        text-red-600
+                        text-red-600 dark:text-red-400
                         hover:bg-red-400 hover:text-white
+                        dark:hover:text-white
                     `}
                 />
             </ul>
