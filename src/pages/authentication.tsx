@@ -5,7 +5,7 @@ import useAuth from "../data/hook/useAuth";
 
 export default function Authentication() {
 
-    const { user,loginGoogle } = useAuth()
+    const { user, loginGoogle } = useAuth()
 
     const [error, setError] = useState(null)
     const [mode, setMode] = useState<'signIn'| 'signUp'>('signIn') // signIn = login | signUp = registration
