@@ -8,6 +8,8 @@ interface AuthContextProps {
     loginGoogle?: () => Promise<void>
 }
 
+const AuthContext = createContext<AuthContextProps>({})
+
 async function normalizedUser(userFirebase: firebase.User): Promise<UserModel> {
     const token = await userFirebase.getIdToken()
     return {
@@ -20,15 +22,19 @@ async function normalizedUser(userFirebase: firebase.User): Promise<UserModel> {
     }
 }
 
-
-const AuthContext = createContext<AuthContextProps>({})
-
 export function AuthProvider(props) {
     const [user, setUser] = useState<UserModel>(null)
 
     async function loginGoogle() {
-        console.log('Login')
-        route.push('/')
+            const resp = await firebase.auth().signInWithPopup(
+                new firebase.auth.GoogleAuthProvider()
+            )
+
+        if(resp.user?.email) {
+            const userLogin = await normalizedUser(resp.user)
+            setUser(userLogin)
+            route.push('/')
+        }
     }
 
     return (

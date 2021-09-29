@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <AuthProvider>
       <AppProvider>
-          <Component {...pageProps} />
+        <Component {...pageProps} />
       </AppProvider>
     </AuthProvider>
   )
