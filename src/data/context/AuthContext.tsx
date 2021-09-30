@@ -6,6 +6,7 @@ import UserModel from '../../models/UserModel';
 
 interface AuthContextProps {
     user?: UserModel
+    loading?: boolean
     loginGoogle?: () => Promise<void>
     logout?: () => Promise<void>
 }
@@ -86,6 +87,7 @@ export function AuthProvider(props) {
     return (
         <AuthContext.Provider value={{
             user,
+            loading,
             loginGoogle,
             logout
         }}>
