@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import Image from 'next/image'
 import router from 'next/router'
 import loadingGif from '../../../public/images/loading.gif'
@@ -10,7 +11,18 @@ export default function forceAuthentication() {
     function renderContent(props) {
         return (
             <>
-                {props.children}
+                <Head>
+                    <script
+                        dangerouslySetInnerHTML={{
+                            __html: `
+                                if(!document.cookie?.includes("admin-template-auth")) {
+                                    window.location.href = "/authentication"
+                                }
+                            `
+                        }}
+                    />
+                    {props.children}            
+                </Head>
             </>
         )
     }
