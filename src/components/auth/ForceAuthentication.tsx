@@ -4,11 +4,11 @@ import router from 'next/router'
 import loadingGif from '../../../public/images/loading.gif'
 import useAuth from "../../data/hook/useAuth"
 
-export default function forceAuthentication() {
+export default function forceAuthentication(props) {
 
     const { user, loading } = useAuth()
 
-    function renderContent(props) {
+    function renderContent() {
         return (
             <>
                 <Head>
