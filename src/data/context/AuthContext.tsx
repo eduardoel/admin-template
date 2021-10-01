@@ -7,6 +7,8 @@ import UserModel from '../../models/UserModel';
 interface AuthContextProps {
     user?: UserModel
     loading?: boolean
+    login?: (email: string, password: string) => Promise<void>
+    signUp?: (email: string, password: string) => Promise<void>
     loginGoogle?: () => Promise<void>
     logout?: () => Promise<void>
 }
@@ -55,6 +57,26 @@ export function AuthProvider(props) {
             }
         }
 
+    async function signUp(email, password) {
+        try {
+            setLoading(true)
+            const resp = await firebase.auth().createUserWithEmailAndPassword(email, password)
+            await configureSession(resp.user) route.push('/') 
+        } finally { 
+            setLoading(false) 
+        } 
+    }
+
+    async function login(email, password) {
+        try {
+            setLoading(true)
+            const resp = await firebase.auth().signInWithEmailAndPassword(email, password)
+            await configureSession(resp.user) route.push('/') 
+        } finally { 
+            setLoading(false) 
+        } 
+    }
+
     async function loginGoogle() {
         try {
             setLoading(true)
@@ -88,6 +110,8 @@ export function AuthProvider(props) {
         <AuthContext.Provider value={{
             user,
             loading,
+            signUp,
+            login,
             loginGoogle,
             logout
         }}>
