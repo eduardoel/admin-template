@@ -61,7 +61,8 @@ export function AuthProvider(props) {
         try {
             setLoading(true)
             const resp = await firebase.auth().createUserWithEmailAndPassword(email, password)
-            await configureSession(resp.user) route.push('/') 
+            await configureSession(resp.user) 
+            route.push('/') 
         } finally { 
             setLoading(false) 
         } 
@@ -71,7 +72,8 @@ export function AuthProvider(props) {
         try {
             setLoading(true)
             const resp = await firebase.auth().signInWithEmailAndPassword(email, password)
-            await configureSession(resp.user) route.push('/') 
+            await configureSession(resp.user) 
+            route.push('/') 
         } finally { 
             setLoading(false) 
         } 
